@@ -6,6 +6,7 @@ const authorFromInput = document.getElementById('author');
 const pagesFromInput = document.getElementById('pages');
 const hasReadFromInput = document.getElementById('read');
 const addBookButton = document.getElementById('add-book');
+const submitButton = document.getElementById('submit');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -23,19 +24,26 @@ function addBookToLibrary() {
     newBookDiv.className = 'new-book';
     newBookDiv.textContent = "Title: " +  newBook.title;
     mainContentContainer.appendChild(newBookDiv);
-}
-
-
-addBookButton.addEventListener("click", function () 
-{
-    addBookToLibrary();
     titleFromInput.value = pagesFromInput.value = authorFromInput.value = ''; // clear inputs
-});
+    closeModal();
+}
+function openModal() {
+    modal.classList.add('active');
+    overlay.classList.add('active');
+}
+function closeModal() {
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+}
+addBookButton.addEventListener("click", openModal);
+
+
+submitButton.addEventListener("click", addBookToLibrary);
 
 
 // initial books to add
-const testbook1 = new Book('test', 'testa', 100, true);
-const testbook2 = new Book('test2', 'testa2', 102, false);
+const testbook1 = new Book('Placeholder Book 1', 'Author 1', 100, true);
+const testbook2 = new Book('Placeholder Book 2', 'Author 2', 200, false);
 library.push(testbook1);
 library.push(testbook2);
 // loop through initial books, add to library
