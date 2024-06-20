@@ -8,6 +8,7 @@ const hasReadFromInput = document.getElementById('read');
 const addBookButton = document.getElementById('add-book');
 const submitButton = document.getElementById('submit');
 const readStatus = true;
+const overlay = document.getElementById('overlay');
 
 
 function Book(title, author, pages, read) {
@@ -93,6 +94,10 @@ function removeBook() {
 addBookButton.addEventListener("click", openModal);
 
 submitButton.addEventListener("click", addBookToLibrary);
+
+overlay.addEventListener('click', function() {
+    closeModal();
+});
 
 
 // initial books to add

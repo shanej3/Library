@@ -14,6 +14,15 @@ body {
     flex-direction: column;
     gap : 2rem;
 }
+.name {
+    position : absolute;
+    left : 2rem;
+    font-size : 2rem;
+}
+.logo {
+    position : absolute;
+    right : 2rem;
+}
 .header {
     font-family: "Poppins", sans-serif;
     font-weight: 700;
@@ -33,6 +42,7 @@ body {
     background : none;
     padding-right : 5rem;
     padding-left : 5rem;
+    background-color: rgba(128, 128, 128, 0.2);
 }
 #add-book:hover, #readCard:hover, #removeCard:hover {
     background-color : rgba(128, 128, 128, 0.486)
@@ -48,7 +58,10 @@ body {
 }
 .modal { /* starts disabled / invisible */
     padding : 1rem;
+    padding-top : 3rem;
     position: fixed;
+    width: 30rem;
+    height: 23rem;
     top: 50%;
     left: 50%;
     transition: 100ms ease-in-out;
@@ -57,17 +70,31 @@ body {
     border-radius: 10px;
     z-index: 10; /* always renmdered on top */
     background-color: white;
-    width: 500px;
-    max-width: 80%;
+    
     display : flex;
     flex-direction: column;
     align-items: center;
+    gap : 0.3rem;
   }
 
 .modal.active { /* open modal */
     transform: translate(-50%, -50%) scale(1);
 }
-
+#overlay {
+    position : fixed;
+    opacity : 0;
+    transition : 100ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+#overlay.active {
+    opacity : 1;
+    pointer-events : all;
+}
 .new-book {
     height : 15rem;
     max-width : 20rem;
@@ -82,7 +109,8 @@ body {
     text-align : center;
     word-break : break-word;
     white-space : normal;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    
 }
 
 .new-book.readTrue {
@@ -100,18 +128,35 @@ body {
     border : none;
     background-color : none;
     background : none;
+    padding-left : 1rem;
+    padding-right : 1rem;
 }
 #submit {
+    font-size : 1.4rem;
     font-family: "Poppins", sans-serif;
     font-weight : 700;
     border : 1px solid black;
     border-radius : 5px;
     background-color : none;
     background : none;
-    padding-right: 0.5rem;
-    padding-left : 0.5rem;
+    padding-right: 0.75rem;
+    padding-left : 0.75rem;
     background-color: rgba(144, 238, 144, 0.568);
 }
 #submit:hover {
     background-color: rgb(144, 238, 144);
+}
+
+#title, #author, #pages {
+    font-size : 1rem;
+    border-radius : 5px;
+    border : 1px solid black;
+    padding : 0.5rem;
+    padding-right : 1rem;
+    padding-left : 1rem;
+}
+#read {
+    transform : scale(1.5);
+    margin-top : 0.5rem;
+    margin-bottom : 1rem;
 }
