@@ -8,6 +8,7 @@ const hasReadFromInput = document.getElementById('read');
 const addBookButton = document.getElementById('add-book');
 const submitButton = document.getElementById('submit');
 
+
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -18,14 +19,49 @@ function Book(title, author, pages, read) {
     };
 }
 function addBookToLibrary() {
-    const newBook = new Book(titleFromInput.value, authorFromInput.value, pagesFromInput.value, true);
+    const newBook = new Book(titleFromInput.value, authorFromInput.value, pagesFromInput.value, hasReadFromInput.checked);
     library.push(newBook);
-    const newBookDiv = document.createElement('div');
-    newBookDiv.className = 'new-book';
-    newBookDiv.textContent = "Title: " +  newBook.title;
-    mainContentContainer.appendChild(newBookDiv);
+    createBookCard(newBook);
     titleFromInput.value = pagesFromInput.value = authorFromInput.value = ''; // clear inputs
     closeModal();
+}
+function createBookCard(newBook) {
+    // create a "card" listing all the information of the book, with a Read and Remove button
+    const newBookDiv = document.createElement('div');
+    newBookDiv.className = "new-book"
+    const title = document.createElement('div');
+    title.id = "titleCard";
+    title.textContent = newBook.title;
+    const author = document.createElement('div');
+    author.id = "authorCard";
+    author.textContent = newBook.author;
+    const pages = document.createElement('div');
+    pages.id = "pagesCard";
+    pages.textContent = newBook.pages + " pages";
+    const readButton = document.createElement('button');
+    readButton.id = "readCard";
+    const removeButton = document.createElement('button');
+    removeButton.id = "removeBook";
+    removeButton.textContent = "Remove";
+    if (newBook.read == true) {
+        readButton.textContent = "Read";
+    }
+    else {
+        readButton.textContent = "Not read";
+    }
+
+    newBookDiv.appendChild(title);
+    newBookDiv.appendChild(author);
+    newBookDiv.appendChild(pages);
+    newBookDiv.appendChild(readButton);
+    newBookDiv.appendChild(removeButton);
+    mainContentContainer.appendChild(newBookDiv);
+
+
+    removeButton.addEventListener("click", function() {
+        newBookDiv.remove();
+    })
+
 }
 function openModal() {
     modal.classList.add('active');
@@ -35,17 +71,20 @@ function closeModal() {
     modal.classList.remove('active');
     overlay.classList.remove('active');
 }
+function removeBook() {
+    const bookDiv = removeButton.parentNode;
+    bookDiv.remove();
+}
 addBookButton.addEventListener("click", openModal);
-
 
 submitButton.addEventListener("click", addBookToLibrary);
 
 
 // initial books to add
-const testbook1 = new Book('Placeholder Book 1', 'Author 1', 100, true);
-const testbook2 = new Book('Placeholder Book 2', 'Author 2', 200, false);
-library.push(testbook1);
-library.push(testbook2);
+//const testbook1 = new Book('Placeholder Book 1', 'Author 1', 100, true);
+//const testbook2 = new Book('Placeholder Book 2', 'Author 2', 200, false);
+//library.push(testbook1);
+//library.push(testbook2);
 // loop through initial books, add to library
 for (let i = 0; i < library.length; i++) {
     const newBook = document.createElement('div');
