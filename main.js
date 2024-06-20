@@ -7,6 +7,7 @@ const pagesFromInput = document.getElementById('pages');
 const hasReadFromInput = document.getElementById('read');
 const addBookButton = document.getElementById('add-book');
 const submitButton = document.getElementById('submit');
+const readStatus = true;
 
 
 function Book(title, author, pages, read) {
@@ -23,6 +24,7 @@ function addBookToLibrary() {
     library.push(newBook);
     createBookCard(newBook);
     titleFromInput.value = pagesFromInput.value = authorFromInput.value = ''; // clear inputs
+    hasReadFromInput.checked = false;
     closeModal();
 }
 function createBookCard(newBook) {
@@ -34,21 +36,17 @@ function createBookCard(newBook) {
     title.textContent = newBook.title;
     const author = document.createElement('div');
     author.id = "authorCard";
-    author.textContent = newBook.author;
+    author.textContent = "by " + newBook.author;
     const pages = document.createElement('div');
     pages.id = "pagesCard";
     pages.textContent = newBook.pages + " pages";
     const readButton = document.createElement('button');
     readButton.id = "readCard";
+    readStatus();
     const removeButton = document.createElement('button');
     removeButton.id = "removeBook";
     removeButton.textContent = "Remove";
-    if (newBook.read == true) {
-        readButton.textContent = "Read";
-    }
-    else {
-        readButton.textContent = "Not read";
-    }
+        
 
     newBookDiv.appendChild(title);
     newBookDiv.appendChild(author);
@@ -57,11 +55,28 @@ function createBookCard(newBook) {
     newBookDiv.appendChild(removeButton);
     mainContentContainer.appendChild(newBookDiv);
 
+    readButton.addEventListener("click", function() {
+        // this feels a little redudant/messy but i guess it works
+        newBook.read = newBook.read ? false : true;
+        readStatus();
+    })
 
     removeButton.addEventListener("click", function() {
         newBookDiv.remove();
     })
+    function readStatus() {
+    if (newBook.read == true) {
+        readButton.textContent = "Read";
+        newBookDiv.classList.add('readTrue');
+    }
+    else {
+        readButton.textContent = "Not read";
+        newBookDiv.classList.remove('readTrue');
+    }}
 
+}
+function updateReadText(newBook) {
+    
 }
 function openModal() {
     modal.classList.add('active');
