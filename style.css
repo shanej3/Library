@@ -31,22 +31,29 @@ body {
     font-size : 3rem;
     border : none;
     background : none;
+    padding-right : 5rem;
+    padding-left : 5rem;
+}
+#add-book:hover, #readCard:hover, #removeCard:hover {
+    background-color : rgba(128, 128, 128, 0.486)
 }
 #main-content {
     margin-left : 5rem;
+    margin-right : 5rem;
     font-size : 1.5rem;
     display : grid;
-    grid-template-columns : repeat(4, 1fr);
-    grid-template-rows: repeat(auto-fill, 10rem);
-    gap : 1rem;
+    grid-template-columns : repeat(5, 1fr);
+    grid-template-rows: repeat(auto-fill, 15rem);
+    gap : 2rem;
 }
 .modal { /* starts disabled / invisible */
+    padding : 1rem;
     position: fixed;
     top: 50%;
     left: 50%;
     transition: 100ms ease-in-out;
     transform: translate(-50%, -50%) scale(0); /* scale(0) makes it invisible */
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 10px;
     z-index: 10; /* always renmdered on top */
     background-color: white;
@@ -62,6 +69,10 @@ body {
 }
 
 .new-book {
+    height : 15rem;
+    max-width : 20rem;
+    font-size : 1rem;
+    padding : 0.5rem;
     background-color: lightpink;
     border : 2px solid black;
     border-radius : 10px;
@@ -69,11 +80,38 @@ body {
     flex-direction: column;
     align-items: center;
     text-align : center;
+    word-break : break-word;
+    white-space : normal;
+    justify-content: space-between;
 }
+
 .new-book.readTrue {
     background-color : lightgreen;
 }
 
 #titleCard {
     font-style : italic;
+}
+
+#readCard, #removeCard {
+    font-size : 1.1rem;
+    font-family: "Poppins", sans-serif;
+    font-weight : 700;
+    border : none;
+    background-color : none;
+    background : none;
+}
+#submit {
+    font-family: "Poppins", sans-serif;
+    font-weight : 700;
+    border : 1px solid black;
+    border-radius : 5px;
+    background-color : none;
+    background : none;
+    padding-right: 0.5rem;
+    padding-left : 0.5rem;
+    background-color: rgba(144, 238, 144, 0.568);
+}
+#submit:hover {
+    background-color: rgb(144, 238, 144);
 }

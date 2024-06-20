@@ -44,7 +44,7 @@ function createBookCard(newBook) {
     readButton.id = "readCard";
     readStatus();
     const removeButton = document.createElement('button');
-    removeButton.id = "removeBook";
+    removeButton.id = "removeCard";
     removeButton.textContent = "Remove";
         
 
