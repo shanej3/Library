@@ -20,7 +20,8 @@ function Book(title, author, pages, read) {
         return this.title + " by " + this.author + ", " + this.pages + " pages, " + this.read;
     };
 }
-function addBookToLibrary() {
+function addBookToLibrary(event) {
+    event.preventDefault();
     const newBook = new Book(titleFromInput.value, authorFromInput.value, pagesFromInput.value, hasReadFromInput.checked);
     library.push(newBook);
     createBookCard(newBook);
@@ -91,9 +92,18 @@ function removeBook() {
     const bookDiv = removeButton.parentNode;
     bookDiv.remove();
 }
+
 addBookButton.addEventListener("click", openModal);
 
-submitButton.addEventListener("click", addBookToLibrary);
+submitButton.addEventListener("click", (event) => { 
+    if (pagesFromInput.validity.valid) {
+        addBookToLibrary(event);
+    }
+    else {
+        console.log("ERROR: NUMBER EXPECTED IN PAGES INPUT");
+    }
+    
+})
 
 overlay.addEventListener('click', function() {
     closeModal();
